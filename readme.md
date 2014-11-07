@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/DeSmart/laravel-mailer.png)](https://travis-ci.org/DeSmart/laravel-mailer)
+
 # desmart/laravel-mailer
 
 Did you by mistake send e-mails from dev machine to production users? We did. 
