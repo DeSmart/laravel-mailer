@@ -1,0 +1,20 @@
+{
+  "name": "desmart/laravel-mailer",
+  "description": "Package catch wrong e-mails sending from developer servers to real user accounts.",
+  "authors": [
+    {
+      "name": "Kamil Piechaczek",
+      "email": "pomek@desmart.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "illuminate/mail": "4.1.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "DeSmart\\LaravelMailer": "src/"
+    }
+  },
+  "minimum-stability": "dev"
+}
