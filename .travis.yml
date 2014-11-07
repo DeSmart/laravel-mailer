@@ -6,6 +6,8 @@ php:
   - 5.6
 
 before_script:
+  - pyrus install pear/PHP_CodeSniffer
+  - phpenv rehash
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev
 
