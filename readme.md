@@ -1,4 +1,6 @@
-[![Build Status](https://api.travis-ci.org/DeSmart/laravel-mailer.png)](https://travis-ci.org/DeSmart/laravel-mailer)
+[![Build Status](https://travis-ci.org/DeSmart/laravel-mailer.svg)](https://travis-ci.org/DeSmart/laravel-mailer)
+[![Total Downloads](https://poser.pugx.org/DeSmart/laravel-mailer/downloads.svg)](https://packagist.org/packages/DeSmart/laravel-mailer)
+[![License](https://poser.pugx.org/DeSmart/laravel-mailer/license.svg)](https://packagist.org/packages/DeSmart/laravel-mailer)
 
 # desmart/laravel-mailer
 
