@@ -1,6 +1,7 @@
 {
   "name": "desmart/laravel-mailer",
   "description": "Prevents from sending email on dev/staging environments.",
+  "license": "MIT",
   "authors": [
     {
       "name": "Kamil Piechaczek",
