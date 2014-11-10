@@ -15,8 +15,7 @@ This package is meant only for dev/test/staging environments.
   1. Add package to composer: `composer require "desmart/laravel-mailer:1.0.*"`
   2. Publish configuration: `php artisan config:publish desmart/laravel-mailer`
   3. Edit configuration file: `app/config/packages/desmart/laravel-mailer/mailer.php` 
-  4. Add ServiceProvider to `app.php` - `'DeSmart\LaravelMailer\MailServiceProvider'`
-    * **Info** - add line after default *MailServiceProvider*: `Illuminate\Mail\MailServiceProvider`
+  4. **Replace** `Illuminate\Mail\MailServiceProvider` with `DeSmart\LaravelMailer\MailServiceProvider`
     
 ## How it works?
 
