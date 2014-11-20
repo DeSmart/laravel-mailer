@@ -1,6 +1,6 @@
 <?php namespace DeSmart\LaravelMailer;
 
-class MailServiceProvider extends \Illuminate\Support\ServiceProvider
+class MailServiceProvider extends \Illuminate\Mail\MailServiceProvider
 {
 
     protected $defer = true;
@@ -11,12 +11,16 @@ class MailServiceProvider extends \Illuminate\Support\ServiceProvider
 
         if (true === $this->app['config']->get('laravel-mailer::mailer.enabled')) {
             $this->registerMailer();
+        } else {
+            parent::register();
         }
     }
 
     protected function registerMailer()
     {
         $this->app->bindShared('mailer', function ($app) {
+            $this->registerSwiftMailer();
+
             $mailer = new Mailer($app['view'], $app['swift.mailer']);
             $mailer->setLogger($app['log'])->setQueue($app['queue']);
             $mailer->setContainer($app);
@@ -34,10 +38,5 @@ class MailServiceProvider extends \Illuminate\Support\ServiceProvider
 
             return $mailer;
         });
-    }
-
-    public function provides()
-    {
-        return ['mailer'];
     }
 }
