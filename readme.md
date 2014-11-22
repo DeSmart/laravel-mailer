@@ -26,5 +26,7 @@ If e-mail address is not in whitelist (note: we only do whitelists by domain so 
 That way every e-mail sent by Laravel will be redirected only to trusted users.
 
 ## Laravel compatibility
+This package should not break compatibility with Laravel Mailer.
 
-Currently package works with Laravel 4.2.
+### Laravel 4.1
+To use `desmart/laravel-mailer` with Laravel 4.1 switch version to `1.0.*`
