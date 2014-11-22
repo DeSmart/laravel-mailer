@@ -7,8 +7,9 @@ class MailerTest extends \PHPUnit_Framework_TestCase
 
     protected $config = [
         'white_list' => [
-            'desmart.com',
-            'desmart.pl',
+            'domain.net',
+            'pomek@desmart.com',
+            'ap*@desmart.com',
         ],
         'enabled' => true,
         'email' => 'pomek+test@desmart.com'
@@ -17,21 +18,33 @@ class MailerTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider replacingEmailAddressInToProvider
      */
-    public function testReplacingEmailAddress($to, $name, $method)
+    public function testReplacingEmailAddress($to, $name, $method, $expected = null)
     {
+        if (null === $expected) {
+            $expected = $this->config['email'];
+        }
+
         $function = 'add' . ucfirst($method);
         $mock = $this->getMock('Swift_Message', [$function]);
 
         if ('replyto' === strtolower($method)) {
             $mock->expects($this->once())->method($function)->with($this->equalTo($to), $this->equalTo($name));
         } else {
-            $mock->expects($this->once())->method($function)->with($this->equalTo($this->config['email']), $this->equalTo($name));
+            $mock->expects($this->once())->method($function)->with($this->equalTo($expected), $this->equalTo($name));
         }
 
         $message = new Message($mock);
         $message->setConfig($this->config);
 
         $message->$method($to, $name);
+    }
+
+    /**
+     * @dataProvider replacingCorrectEmailAddressesProvider
+     */
+    public function testReplacingCorrectEmailAddresses($to, $name, $method, $expected)
+    {
+        return $this->testReplacingEmailAddress($to, $name, $method, $expected);
     }
 
     /**
@@ -65,6 +78,17 @@ class MailerTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
+    public function replacingCorrectEmailAddressesProvider() 
+    {
+        return [
+            ['pomek@desmart.com', 'Pomek', 'to', 'pomek@desmart.com'],
+            ['apps@desmart.com', 'Apps', 'cc', 'apps@desmart.com'],
+            ['pomek+1@desmart.com', 'Pomek1', 'bcc', $this->config['email']],
+            ['as@desmart.com', 'As', 'to', $this->config['email']],
+            ['pomek+1@desmart.com', 'Pomek1', 'replyTo', 'pomek+1@desmart.com'],
+        ];
+    }
+
     public function replacingArrayEmailAddress()
     {
         $result = [];
@@ -86,26 +110,15 @@ class MailerTest extends \PHPUnit_Framework_TestCase
                 [
                     'foo@bar.com',
                     'bar@foo.com',
-                ],
-                [
-                    $this->config['email'] => null,
-                ],
-                $method,
-            ];
-
-            $result[] = [
-                [
-                    'foo@bar.com',
-                    'bar@foo.com',
-                    'apps@desmart.com',
+                    'example@domain.net',
                     'pomek@desmart.com',
-                    'pomek@desmart.pl',
+                    'apps@desmart.com',
                 ],
                 [
                     $this->config['email'] => null,
-                    'apps@desmart.com' => null,
+                    'example@domain.net' => null,
                     'pomek@desmart.com' => null,
-                    'pomek@desmart.pl' => null,
+                    'apps@desmart.com' => null,
                 ],
                 $method,
             ];
