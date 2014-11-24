@@ -8,11 +8,11 @@ class MailerTest extends \PHPUnit_Framework_TestCase
     protected $config = [
         'white_list' => [
             'domain.net',
-            'pomek@desmart.com',
-            'ap*@desmart.com',
+            'fr*@stylo.dev',
+            'foo@bar.com',
         ],
         'enabled' => true,
-        'email' => 'pomek+test@desmart.com'
+        'email' => 'myAddress@domain.dev'
     ];
 
     /**
@@ -67,25 +67,26 @@ class MailerTest extends \PHPUnit_Framework_TestCase
     public function replacingEmailAddressInToProvider()
     {
         return [
-            ['foo@bar.com', 'Mr Foo', 'to'],
-            ['foo@bar.com', null, 'to'],
-            ['foo@bar.com', 'Mr Foo', 'bcc'],
-            ['foo@bar.com', null, 'bcc'],
-            ['foo@bar.com', 'Mr Foo', 'cc'],
-            ['foo@bar.com', null, 'cc'],
-            ['foo@bar.com', 'Mr Foo', 'replyTo'],
-            ['foo@bar.com', null, 'replyTo'],
+            ['bar@foo.dev', 'Mr Foo', 'to'],
+            ['bar@foo.dev', null, 'to'],
+            ['bar@foo.dev', 'Mr Foo', 'bcc'],
+            ['bar@foo.dev', null, 'bcc'],
+            ['bar@foo.dev', 'Mr Foo', 'cc'],
+            ['bar@foo.dev', null, 'cc'],
+            ['bar@foo.dev', 'Mr Foo', 'replyTo'],
+            ['bar@foo.dev', null, 'replyTo'],
         ];
     }
 
     public function replacingCorrectEmailAddressesProvider() 
     {
         return [
-            ['pomek@desmart.com', 'Pomek', 'to', 'pomek@desmart.com'],
-            ['apps@desmart.com', 'Apps', 'cc', 'apps@desmart.com'],
-            ['pomek+1@desmart.com', 'Pomek1', 'bcc', $this->config['email']],
+            ['foo@bar.com', 'Pomek', 'to', 'foo@bar.com'],
+            ['free@stylo.dev', 'Apps', 'cc', 'free@stylo.dev'],
+            ['foo+1@bar.com', 'Pomek1', 'bcc', $this->config['email']],
             ['as@desmart.com', 'As', 'to', $this->config['email']],
-            ['pomek+1@desmart.com', 'Pomek1', 'replyTo', 'pomek+1@desmart.com'],
+            ['foo+1@bar.com', 'Pomek1', 'replyTo', 'foo+1@bar.com'],
+            ['domain.net@bar.com', 'Domain Net', 'bcc', $this->config['email']],
         ];
     }
 
@@ -111,14 +112,14 @@ class MailerTest extends \PHPUnit_Framework_TestCase
                     'foo@bar.com',
                     'bar@foo.com',
                     'example@domain.net',
-                    'pomek@desmart.com',
-                    'apps@desmart.com',
+                    'foo@bar.com',
+                    'free@stylo.dev',
                 ],
                 [
                     $this->config['email'] => null,
                     'example@domain.net' => null,
-                    'pomek@desmart.com' => null,
-                    'apps@desmart.com' => null,
+                    'foo@bar.com' => null,
+                    'free@stylo.dev' => null,
                 ],
                 $method,
             ];
