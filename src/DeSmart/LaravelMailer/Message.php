@@ -54,6 +54,10 @@ class Message extends \Illuminate\Mail\Message
                 return $address;
             }
 
+            if (false === strpos($row, '@')) {
+                $row = sprintf('*@%s', $row);
+            }
+
             $pattern = sprintf('#%s#', str_replace('\*', '.*', preg_quote($row)));
 
             if (true == preg_match($pattern, $address)) {
