@@ -49,11 +49,18 @@ class Message extends \Illuminate\Mail\Message
      */
     protected function validateEmail($address)
     {
-        $domain = explode('@', $address)[1];
-
         foreach ($this->config['white_list'] as $row) {
+            if ($row === $address) {
+                return $address;
+            }
 
-            if (false !== strstr($row, $domain)) {
+            if (false === strpos($row, '@')) {
+                $row = sprintf('*@%s', $row);
+            }
+
+            $pattern = sprintf('#%s#', str_replace('\*', '.*', preg_quote($row)));
+
+            if (true == preg_match($pattern, $address)) {
                 return $address;
             }
         }
