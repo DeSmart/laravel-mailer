@@ -21,7 +21,7 @@ class MailServiceProvider extends \Illuminate\Mail\MailServiceProvider
         $this->app->bindShared('mailer', function ($app) {
             $this->registerSwiftMailer();
 
-            $mailer = new Mailer($app['view'], $app['swift.mailer']);
+            $mailer = new Mailer($app['view'], $app['swift.mailer'], $app['events']);
             $mailer->setLogger($app['log'])->setQueue($app['queue']);
             $mailer->setContainer($app);
 

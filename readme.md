@@ -12,7 +12,7 @@ This package is meant only for dev/test/staging environments.
 
 ## Installation
 
-  1. Add package to composer: `composer require "desmart/laravel-mailer:1.0.*"`
+  1. Add package to composer: `composer require "desmart/laravel-mailer:1.1.*"`
   2. Publish configuration: `php artisan config:publish desmart/laravel-mailer`
   3. Edit configuration file: `app/config/packages/desmart/laravel-mailer/mailer.php` 
   4. **Replace** `Illuminate\Mail\MailServiceProvider` with `DeSmart\LaravelMailer\MailServiceProvider`
@@ -26,5 +26,7 @@ If e-mail address is not in whitelist (note: we only do whitelists by domain so 
 That way every e-mail sent by Laravel will be redirected only to trusted users.
 
 ## Laravel compatibility
+This package should not break compatibility with Laravel Mailer.
 
-Currently package works only with Laravel 4.1.
+### Laravel 4.1
+To use `desmart/laravel-mailer` with Laravel 4.1 switch version to `1.0.*`
