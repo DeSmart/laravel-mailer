@@ -7,7 +7,7 @@ class MailServiceProvider extends \Illuminate\Mail\MailServiceProvider
 
     public function register()
     {
-        $configPath = __DIR__ . '/../config/desmart-laravel-mailer.php';
+        $configPath = __DIR__ . '/../../config/desmart-laravel-mailer.php';
         $this->publishes([$configPath => config_path('desmart-laravel-mailer.php')], 'config');
         $this->mergeConfigFrom($configPath, 'desmart-laravel-mailer');
 
