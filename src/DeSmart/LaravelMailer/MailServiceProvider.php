@@ -26,9 +26,7 @@ class MailServiceProvider extends \Illuminate\Mail\MailServiceProvider
             // Once we have create the mailer instance, we will set a container instance
             // on the mailer. This allows us to resolve mailer classes via containers
             // for maximum testability on said classes instead of passing Closures.
-            $mailer = new Mailer(
-                $app['view'], $app['swift.mailer'], $app['events']
-            );
+            $mailer = new Mailer($app['view'], $app['swift.mailer'], $app['events']);
 
             $this->setMailerDependencies($mailer, $app);
 
