@@ -21,7 +21,7 @@ This package is meant only for dev/test/staging environments.
 
 When mailer is enabled it replaces default `\Illuminate\Mail\Mailer`. Every `to()`, `cc()`, `bcc()` method call will be intercepted. 
 
-If e-mail address is not in white list (note: we only do white lists by domain so be careful with this) it will be changed to `DESMART_LARAVEL_MAILER_EMAIL` address from your `.env` file.
+If e-mail address is not in whitelist (note: we only do whitelists by domain so be careful with this) it will be changed to `desmart-laravel-mailer.email` address.
 
 That way every e-mail sent by Laravel will be redirected only to trusted users.
 
