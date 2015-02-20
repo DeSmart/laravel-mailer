@@ -10,14 +10,6 @@ To prevent this situations we created a simple catch-all extension for default L
 
 This package is meant only for dev/test/staging environments.
 
-## Laravel 5
-Laravel 5 has removed cascaded config files. If you published old configuration file (`app/config/packages/desmart/laravel-mailer/mailer.php`)
-then you should add your configuration to `.env` file:
-
- * `DESMART_LARAVEL_MAILER_WHITE_LIST`: email addresses from `white_list` key, you should implode to one string separates pipe (`|`),
- * `DESMART_LARAVEL_MAILER_ENABLED`: if package is to be enabled set on `true`
- * `DESMART_LARAVEL_MAILER_EMAIL`: fallback email address (`email` key in old configuration)
-
 ## Installation
 
   1. Add package to composer: `composer require "desmart/laravel-mailer:1.2.*"`
